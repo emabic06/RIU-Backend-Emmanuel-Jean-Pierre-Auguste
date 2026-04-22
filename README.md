@@ -10,15 +10,17 @@ El proyecto sigue una **arquitectura hexagonal** (Ports & Adapters) sin módulos
 
 ```
 src/main/java/com/.../riubackend/
-├── domain/                          # Capa de dominio (modelos, puertos, excepciones)
+├── domain/                          # Capa de dominio (modelos, puertos de salida, excepciones)
 │   ├── model/                       # HotelSearch, SearchCount (records inmutables)
 │   ├── port/
-│   │   ├── in/                      # Puertos de entrada (use cases)
-│   │   └── out/                     # Puertos de salida (repository, event publisher)
-│   └── exception/                   # Excepciones de dominio
-├── application/                     # Capa de aplicación (servicios)
+│   │   └── out/                     # Puertos de salida (SearchRepository, SearchEventPublisher)
+│   └── exception/                   # Excepciones de dominio (SearchNotFoundException)
+├── application/                     # Capa de aplicación (puertos de entrada y servicios)
+│   ├── port/
+│   │   └── in/                      # Puertos de entrada (CreateSearchUseCase, GetSearchCountUseCase)
 │   └── service/                     # CreateSearchService, GetSearchCountService, PersistSearchService
-└── infrastructure/                  # Capa de infraestructura (adaptadores)
+│                                    # (sin anotaciones Spring, registrados como beans en infraestructura)
+└── infrastructure/                  # Capa de infraestructura (adaptadores y configuración Spring)
     ├── adapter/
     │   ├── in/
     │   │   ├── rest/                # Controlador REST, DTOs, validadores, mapper
@@ -26,7 +28,7 @@ src/main/java/com/.../riubackend/
     │   └── out/
     │       ├── kafka/               # Productor Kafka, DTOs, mapper
     │       └── persistence/         # Entidades JPA, repositorio, mapper
-    └── config/                      # Configuración Kafka, OpenAPI
+    └── config/                      # BeanConfig, KafkaConfig, OpenApiConfig
 ```
 
 ### Tecnologías
@@ -146,13 +148,11 @@ Obtiene el número de búsquedas idénticas para un `searchId` dado.
         "hotelId": "1234aBc",
         "checkIn": "29/12/2023",
         "checkOut": "31/12/2023",
-        "ages": [1, 3, 29, 30]
+        "ages": [30, 29, 1, 3]
     },
     "count": 100
 }
 ```
-
-> **Nota:** Las edades en la respuesta se devuelven **ordenadas**. Está hecho así porque desde el punto de vista de negocio, una búsqueda de hotel con edades **[30, 29, 1, 3]** y otra con **[1, 3, 29, 30]** representan la misma búsqueda (mismas personas, mismo hotel, mismas fechas). Sería incorrecto contarlas como búsquedas distintas solo porque el cliente envió las edades en otro orden.
 
 ---
 

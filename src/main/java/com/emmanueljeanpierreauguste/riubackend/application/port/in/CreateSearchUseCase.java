@@ -1,4 +1,4 @@
-package com.emmanueljeanpierreauguste.riubackend.domain.port.in;
+package com.emmanueljeanpierreauguste.riubackend.application.port.in;
 
 import com.emmanueljeanpierreauguste.riubackend.domain.model.HotelSearch;
 

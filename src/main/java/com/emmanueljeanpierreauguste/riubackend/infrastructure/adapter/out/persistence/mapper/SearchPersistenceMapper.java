@@ -31,20 +31,19 @@ public interface SearchPersistenceMapper {
     HotelSearch toDomain(SearchEntity entity);
 
     /**
-     * Converts a list of ages to a sorted comma-separated string.
-     * Sorting ensures that count comparison works correctly.
+     * Converts a list of ages to a comma-separated string preserving original order.
+     * The order of ages affects the count comparison as per requirements.
      */
     default String agesToString(List<Integer> ages) {
         if (ages == null || ages.isEmpty()) {
             return "";
         }
-        List<Integer> sorted = ages.stream().sorted().collect(Collectors.toList());
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < sorted.size(); i++) {
+        for (int i = 0; i < ages.size(); i++) {
             if (i > 0) {
                 sb.append(',');
             }
-            sb.append(sorted.get(i));
+            sb.append(ages.get(i));
         }
         return sb.toString();
     }

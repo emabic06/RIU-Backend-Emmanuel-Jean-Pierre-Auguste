@@ -1,12 +1,9 @@
 package com.emmanueljeanpierreauguste.riubackend.application.service;
 
-import com.emmanueljeanpierreauguste.riubackend.domain.exception.SearchNotFoundException;
 import com.emmanueljeanpierreauguste.riubackend.domain.model.HotelSearch;
-import com.emmanueljeanpierreauguste.riubackend.domain.port.in.CreateSearchUseCase;
+import com.emmanueljeanpierreauguste.riubackend.application.port.in.CreateSearchUseCase;
 import com.emmanueljeanpierreauguste.riubackend.domain.port.out.SearchEventPublisher;
-import com.emmanueljeanpierreauguste.riubackend.domain.port.out.SearchRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
@@ -14,7 +11,6 @@ import java.util.UUID;
  * Application service implementing the create search use case.
  * Generates a unique ID and publishes the search event to Kafka.
  */
-@Service
 @RequiredArgsConstructor
 public class CreateSearchService implements CreateSearchUseCase {
 

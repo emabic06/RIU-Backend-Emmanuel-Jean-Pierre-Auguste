@@ -2,8 +2,8 @@ package com.emmanueljeanpierreauguste.riubackend.infrastructure.adapter.in.rest;
 
 import com.emmanueljeanpierreauguste.riubackend.domain.model.HotelSearch;
 import com.emmanueljeanpierreauguste.riubackend.domain.model.SearchCount;
-import com.emmanueljeanpierreauguste.riubackend.domain.port.in.CreateSearchUseCase;
-import com.emmanueljeanpierreauguste.riubackend.domain.port.in.GetSearchCountUseCase;
+import com.emmanueljeanpierreauguste.riubackend.application.port.in.CreateSearchUseCase;
+import com.emmanueljeanpierreauguste.riubackend.application.port.in.GetSearchCountUseCase;
 import com.emmanueljeanpierreauguste.riubackend.infrastructure.adapter.in.rest.mapper.SearchRestMapper;
 import com.emmanueljeanpierreauguste.riubackend.infrastructure.adapter.in.rest.validator.SearchRequestValidator;
 import com.fasterxml.jackson.databind.ObjectMapper;

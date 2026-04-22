@@ -29,8 +29,14 @@ public class KafkaSearchProducer implements SearchEventPublisher {
     @Override
     public void publish(HotelSearch hotelSearch) {
         SearchEventDto dto = searchKafkaMapper.toDto(hotelSearch);
-        kafkaTemplate.send(TOPIC, hotelSearch.searchId(), dto);
-        log.info("Published search event to Kafka: {}", hotelSearch.searchId());
+        kafkaTemplate.send(TOPIC, hotelSearch.searchId(), dto)
+                .whenComplete((result, ex) -> {
+                    if (ex != null) {
+                        log.error("Failed to publish search event to Kafka: {}", hotelSearch.searchId(), ex);
+                        throw new RuntimeException("Failed to publish search event", ex);
+                    }
+                    log.info("Published search event to Kafka: {}", hotelSearch.searchId());
+                });
     }
 }
 

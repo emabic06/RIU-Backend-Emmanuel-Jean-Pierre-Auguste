@@ -25,7 +25,7 @@ public interface SearchRepository {
     Optional<HotelSearch> findBySearchId(String searchId);
 
     /**
-     * Counts how many searches share the same hotelId, checkIn, checkOut and ages (sorted).
+     * Counts how many searches share the same hotelId, checkIn, checkOut and ages (in exact order).
      *
      * @param hotelSearch the reference search
      * @return the count of identical searches

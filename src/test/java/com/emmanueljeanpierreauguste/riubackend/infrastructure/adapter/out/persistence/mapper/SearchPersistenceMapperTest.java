@@ -15,7 +15,7 @@ class SearchPersistenceMapperTest {
     private final SearchPersistenceMapper mapper = new SearchPersistenceMapperImpl();
 
     @Test
-    @DisplayName("Should convert domain to entity with sorted ages string")
+    @DisplayName("Should convert domain to entity preserving ages order")
     void shouldConvertToEntity() {
         HotelSearch search = new HotelSearch("id1", "hotel1",
                 LocalDate.of(2023, 12, 29), LocalDate.of(2023, 12, 31),
@@ -26,7 +26,7 @@ class SearchPersistenceMapperTest {
         assertAll(
                 () -> assertEquals("id1", entity.getSearchId()),
                 () -> assertEquals("hotel1", entity.getHotelId()),
-                () -> assertEquals("1,3,29,30", entity.getAges()),
+                () -> assertEquals("30,1,29,3", entity.getAges()),
                 () -> assertNull(entity.getId())
         );
     }

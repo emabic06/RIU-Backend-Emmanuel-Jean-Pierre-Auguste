@@ -4,14 +4,12 @@ import com.emmanueljeanpierreauguste.riubackend.domain.model.HotelSearch;
 import com.emmanueljeanpierreauguste.riubackend.domain.port.out.SearchRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 
 /**
  * Application service responsible for persisting hotel searches
  * received from the Kafka consumer.
  * Uses virtual threads for database persistence.
  */
-@Service
 @RequiredArgsConstructor
 @Slf4j
 public class PersistSearchService {

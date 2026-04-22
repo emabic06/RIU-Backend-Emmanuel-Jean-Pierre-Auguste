@@ -28,8 +28,8 @@ class GetSearchCountServiceTest {
     private GetSearchCountService getSearchCountService;
 
     @Test
-    @DisplayName("Should return count with sorted ages")
-    void shouldReturnCountWithSortedAges() {
+    @DisplayName("Should return count with original ages order")
+    void shouldReturnCountWithOriginalAgesOrder() {
         HotelSearch search = new HotelSearch("id1", "hotel1",
                 LocalDate.of(2023, 12, 29), LocalDate.of(2023, 12, 31),
                 List.of(30, 29, 1, 3));
@@ -43,7 +43,7 @@ class GetSearchCountServiceTest {
                 () -> assertEquals("id1", result.searchId()),
                 () -> assertEquals("hotel1", result.hotelId()),
                 () -> assertEquals(5, result.count()),
-                () -> assertEquals(List.of(1, 3, 29, 30), result.ages())
+                () -> assertEquals(List.of(30, 29, 1, 3), result.ages())
         );
     }
 

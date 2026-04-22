@@ -39,7 +39,7 @@ public class PostgresSearchRepository implements SearchRepository {
 
     /**
      * {@inheritDoc}
-     * Ages are stored sorted, so the count comparison uses the sorted string.
+     * Ages are stored as a comma-separated string preserving original order.
      */
     @Override
     public long countIdenticalSearches(HotelSearch hotelSearch) {
